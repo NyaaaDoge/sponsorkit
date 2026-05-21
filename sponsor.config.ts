@@ -10,6 +10,21 @@ export default defineConfig({
   outputDir: './sponsorkit',
   width: 800,
   formats: ['json', 'svg', 'png'],
+  svgInlineCSS: `
+text {
+  font-weight: 300;
+  font-size: 14px;
+  fill: #777777;
+  font-family: 'Noto Sans CJK SC', 'Noto Sans CJK JP', 'Noto Sans CJK TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.sponsorkit-link {
+  cursor: pointer;
+}
+.sponsorkit-tier-title {
+  font-weight: 500;
+  font-size: 20px;
+}
+`,
   includePastSponsors: true,
 
   customComposer: async (composer, sponsors) => {
