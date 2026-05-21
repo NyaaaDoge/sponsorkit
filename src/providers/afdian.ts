@@ -81,7 +81,7 @@ export async function fetchAfdianSponsors(options: SponsorkitConfig['afdian'] = 
     let name = raw.user.name
     if (name.startsWith('爱发电用户_'))
       name = raw.user.user_id.slice(0, 5)
-    const avatarUrl = raw.user.avatar
+    const avatarUrl = normalizeAfdianAvatarUrl(raw.user.avatar)
     return {
       sponsor: {
         type: 'User',
@@ -110,4 +110,8 @@ export async function fetchAfdianSponsors(options: SponsorkitConfig['afdian'] = 
 
 function md5(token: string, params: string, ts: number, userId: string) {
   return createHash('md5').update(`${token}params${params}ts${ts}user_id${userId}`).digest('hex')
+}
+
+function normalizeAfdianAvatarUrl(url: string) {
+  return url.replace(/(\/default\/avatar\/avatar-[^.]+\.png).*/, '$1')
 }
