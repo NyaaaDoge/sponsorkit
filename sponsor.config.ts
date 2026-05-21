@@ -13,33 +13,31 @@ export default defineConfig({
   includePastSponsors: true,
 
   customComposer: async (composer, sponsors) => {
-    const activeSponsors = sponsors
-      .filter(sponsor => sponsor.monthlyDollars > 0)
-      .sort((a, b) => b.monthlyDollars - a.monthlyDollars)
-
-    const pastSponsors = sponsors
-      .filter(sponsor => sponsor.monthlyDollars <= 0)
-      .sort((a, b) => Date.parse(b.createdAt || '') - Date.parse(a.createdAt || ''))
+    const visibleSponsors = sponsors
+      .sort((a, b) => getAmount(b) - getAmount(a))
 
     composer.addSpan(20)
 
-    if (activeSponsors.length) {
+    if (visibleSponsors.length) {
       composer
         .addTitle('赞助者')
         .addSpan(10)
 
-      await composer.addSponsorGrid(activeSponsors, tierPresets.medium)
-    }
-
-    if (pastSponsors.length) {
-      composer
-        .addSpan(20)
-        .addTitle('历史赞助者')
-        .addSpan(10)
-
-      await composer.addSponsorGrid(pastSponsors, tierPresets.xs)
+      await composer.addSponsorGrid(visibleSponsors, tierPresets.medium)
     }
 
     composer.addSpan(20)
   },
 })
+
+function getAmount(sponsor: any) {
+  const amount = Number(sponsor.monthlyDollars)
+  if (Number.isFinite(amount) && amount > 0)
+    return amount
+
+  const total = Number.parseFloat(sponsor.raw?.all_sum_amount)
+  if (Number.isFinite(total))
+    return total
+
+  return 0
+}
