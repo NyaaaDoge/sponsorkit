@@ -13,7 +13,7 @@ Thank you for your support!
 ## Donations
 
 - Become a Sponsor on [爱发电](https://ifdian.net/a/NyaaaDoge)  
-- Contact me by email: [m@nyaaadoge.top](mailto:m@nyaaadoge.top?subject=Hello%20NyaaaDoge)  
+- Contact me by email: [email@nyaaadoge.top](mailto:m@nyaaadoge.top?subject=Hello%20NyaaaDoge)  
 - [WeChat](https://blog.nyaaadoge.top/upload/wechat.jpg)  
 
 ## Thanks
